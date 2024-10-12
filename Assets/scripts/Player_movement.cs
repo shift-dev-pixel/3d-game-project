@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_movement : MonoBehaviour
 {
     private CharacterController characterController;
-    public Transform Camera;
+    public Transform Orientation;
 
     public float speed = 12f;
     public float gravity = -9.81f * 2;
@@ -38,7 +38,7 @@ public class Player_movement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = Camera.transform.right * x + Camera.transform.forward * z;
+        Vector3 move = Orientation.transform.right * x + Orientation.transform.forward * z;
 
         characterController.Move(move * speed * Time.deltaTime);
 

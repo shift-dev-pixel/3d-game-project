@@ -6,6 +6,8 @@ public class Mouse_controls : MonoBehaviour
 {
     public float mouceSensitivity = 500f;
 
+    public Transform Orientation;
+
     float xRotation = 0f;
     float yRotation = 0f;
 
@@ -33,5 +35,6 @@ public class Mouse_controls : MonoBehaviour
 
         //применение поворота на игрока
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        Orientation.transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 }
