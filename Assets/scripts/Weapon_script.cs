@@ -7,15 +7,20 @@ public class Weapon_script : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 300f;
+    public float fireRate = 20f;
 
     public Camera fpsCam;
     public ParticleSystem flash;
+    public GameObject impact;
+
+    private float nextTimeToFire = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextTimeToFire)
         {
+            nextTimeToFire = Time.time + 1f/fireRate;
             FireWeapon();
         }
     }
@@ -32,6 +37,9 @@ public class Weapon_script : MonoBehaviour
             {
                 target.TakeDamage(damage);
             }
+
+            GameObject impactGo = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGo, 0.2f);
         }
     }
 }
