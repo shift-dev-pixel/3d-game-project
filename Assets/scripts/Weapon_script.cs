@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon_script : MonoBehaviour
 {
-    public float damage = 10f;
+    public float damage = 1f;
     public float range = 300f;
     public float fireRate = 20f;
 

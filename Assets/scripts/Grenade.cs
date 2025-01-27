@@ -12,10 +12,12 @@ public class Grenade : MonoBehaviour
     public float grenadeCooldown = 3f;
     private float lastUsedTime;
 
+    public ParticleSystem launchFlash;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > lastUsedTime + grenadeCooldown)
+        if (Input.GetKeyUp(KeyCode.Mouse1) && Time.time > lastUsedTime + grenadeCooldown)
         {
             fireWeapon();
             lastUsedTime = Time.time;
@@ -24,8 +26,10 @@ public class Grenade : MonoBehaviour
 
     private void fireWeapon()
     {
+        launchFlash.Play();
         GameObject grenade = Instantiate(grenadePrefab, grenadeSpawn.position, Quaternion.identity);
 
-        grenade.GetComponent<Rigidbody>().AddForce(grenadeSpawn.forward.normalized * gremadeVelocity, ForceMode.Impulse);
+        grenade.GetComponent<Rigidbody>().AddForce(grenadeSpawn.forward * gremadeVelocity, ForceMode.Impulse);
+
     }
 }
