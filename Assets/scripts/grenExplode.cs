@@ -45,7 +45,7 @@ public class grenExplode : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
         foreach (Collider nearbyObject in colliders) { 
-            Target health = nearbyObject.GetComponent<Target>();
+            EnemyHealth health = nearbyObject.GetComponent<EnemyHealth>();
             if (health != null)
             {
                 health.TakeDamage(50);

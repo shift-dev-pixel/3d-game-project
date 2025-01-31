@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon_script : MonoBehaviour
 {
-    public float damage = 1f;
+    public int damage = 1;
     public float range = 300f;
     public float fireRate = 20f;
 
@@ -32,7 +32,7 @@ public class Weapon_script : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
         {
             Debug.Log(hit.transform);
-            Target target = hit.transform.GetComponent<Target>();
+            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
             if (target != null )
             {
                 target.TakeDamage(damage);
