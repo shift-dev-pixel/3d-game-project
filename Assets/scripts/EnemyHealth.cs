@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 100f; // Максимальное здоровье врага
-    public float currentHealth; // Текущее здоровье врага
+    public int maxHealth = 100; // Максимальное здоровье врага
+    public int currentHealth; // Текущее здоровье врага
     public GameObject healthBarPrefab; // Префаб полоски здоровья
     public Vector3 healthBarOffset = new Vector3(0, 2, 0); // Смещение полоски здоровья над врагом
 
@@ -24,8 +24,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        // Обновляем позицию полоски здоровья
-        if (healthBarUI != null)
+        // Проверяем, виден ли враг в камере
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position + healthBarOffset);
+
+        // Если враг виден в камере, обновляем позицию полоски здоровья
+        bool isVisible = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        healthBarUI.SetActive(isVisible);
+
+        if (isVisible)
         {
             healthBarUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + healthBarOffset);
         }
